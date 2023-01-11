@@ -20,7 +20,7 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/write">Write</a><!--경로 : 라우터 쓰듯이 작성-->
+                    <a class="nav-link" href="/write">Write</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/list">리스트</a>
@@ -35,9 +35,9 @@
     </nav>
     <h3 class="container mt-3">오늘의 일정</h3>
     <div class="container mt-3">
-        <form action="/edit?_method=PUT" method="POST"><!--바뀐 데이터를 다시 add-->
+        <form action="/edit?_method=PUT" method="POST">
             <div class="form-group">
-                <input type="hidden" value="<%= postdata._id %>" name="id"><!-- 전송할 id 값을 가지고 있는 보이지 않는 폼 추가-->
+                <input type="hidden" value="<%= postdata._id %>" name="id">
                 <label for="todo">할일</label>
                 <input id="todo" type="text" class="form-control" name="title" value="<%= postdata.제목 %>">
             </div>
@@ -45,20 +45,29 @@
                 <label for="date">날짜</label>
                 <input id="date" type="text" class="form-control" name="date" value="<%= postdata.날짜 %>">
             </div>
-            <button type="submit" class="btn btn-outline-secondary">Submit</button>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-outline-secondary">완료</button>
+                <button type="button" class="btn btn-dark back">취소</button>
+            </div>
         </form>
     </div>
-    
+
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         const dateBox = document.getElementById("date");
         const date = new Date();
         const nowYear = date.getFullYear();
         const nowMonth = date.getMonth();
         const nowDate = date.getDate();
-
+        
         const toDay = `${nowYear}-${nowMonth + 1}-${nowDate}`;
-
+        
         dateBox.setAttribute('value', toDay);
+
+
+        $('.back').click(function(e) {
+            history.back();
+        })
     </script>
 
 
